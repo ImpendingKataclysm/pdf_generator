@@ -3,6 +3,7 @@ import pandas as pd
 
 TOPIC_FILE = "topics.csv"
 HEADER = "Topic"
+PAGES = "Pages"
 OUTPUT_FILE = "output.pdf"
 
 pdf = FPDF(orientation="P", unit="mm", format="A4")
@@ -14,5 +15,8 @@ for index, row in df.iterrows():
     pdf.set_text_color(100, 100, 180)
     pdf.cell(w=0, h=12, txt=row[HEADER], align='L', ln=1)
     pdf.line(x1=10, y1=21, x2=200, y2=21)
+
+    for i in range(row[PAGES] - 1):
+        pdf.add_page()
 
 pdf.output(OUTPUT_FILE)
